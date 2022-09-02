@@ -1,0 +1,11 @@
+import pandas as pd
+import numpy as np
+df = pd.read_csv('subset-covid-data.csv')
+#df_group = df.groupby(['continent']).agg({'day': lambda x: x.nunique(), 'population':"sum"})
+df_group = df.groupby('country')["cases"].sum().sort_values(ascending=False).head(5)
+df.at[1,'continent'] = 'vietanh'
+df.iloc[1,2] = '123'
+print(df)
+
+
+
