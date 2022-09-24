@@ -1,0 +1,34 @@
+import pandas as pd
+df = pd.read_csv('D:\jupyter\subset-covid-data.csv')
+
+#Tổng số lượng người mắc bệnh của từng châu lục
+df_cases_continent = df.groupby( by ='continent').agg({'cases' : 'sum',}).sort_values(by='cases',ascending = False)
+#print(df_deaths_continent)
+
+#Top 5 quốc gia có số lượng ca mắc mới lớn nhất
+df_deaths_country = df.groupby( by ='country').agg({'deaths' : 'sum',}).sort_values(by='deaths',ascending = False)
+#print(df_deaths_country.head(5))
+
+#Tổng số lượng ca tử vong của từng châu lục
+df_deaths_continent = df.groupby( by ='continent').agg({'deaths' : 'sum',}).sort_values(by='deaths',ascending = False)
+#print(df_deaths_continent)
+
+#Top 5 quốc gia có số lượng ca tử vong lớn nhất
+#print(df_deaths_continent.head(5))
+#print(df.date.value_counts()) #kiểm tra số lượng ngày xuất hiện trong file
+
+
+# Check số lượng nhiễm bệnh ngày 12-4 ở các nước có giống nhau hay không
+# lọc dữ liệu nhiễu:
+cleaned_df = df[df.date == '2020-04-12']
+# Vẽ biểu đồ phân bố số lượng ca mắc mới ở các quốc gia
+print ("trung bình số ca mắc mới: " + str(cleaned_df .cases.mean()))
+print ("trung vị của số ca mắc mới: "+ str(cleaned_df .cases.median()))
+import matplotlib.pyplot as plt
+plt.hist(cleaned_df .cases, bins = 200)
+plt.title("Phân bố số ca mắc mới")
+plt.xlabel("số số ca mắc mới")
+plt.ylabel("Số lượng quốc gia")
+plt.show()
+
+
